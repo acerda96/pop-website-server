@@ -24,14 +24,13 @@ export default {
 };
 </script>
 
-<style>
-@import "./styles.scss";
+<style lang="scss">
 @import "./styles/_variables.scss";
 
 body {
   margin: 0;
   background-image: url("./images/map.jpeg");
-  font-family: "Indie Flower";
+  font-family: $main-font;
   background-size: 100%;
 }
 
@@ -39,6 +38,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .page-container {
   padding-top: 220px;
 }
