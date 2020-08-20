@@ -40,10 +40,10 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  font-weight: bold;
+  font-family: "Coming Soon";
   color: white;
   padding-top: 2px;
-  background-color: rgb(153, 151, 151);
+  background-color: rgb(110, 177, 84);
   border-radius: 10px;
   width: 180px;
   height: 33px;

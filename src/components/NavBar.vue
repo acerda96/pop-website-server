@@ -2,7 +2,7 @@
   <div class="nav">
     <nav class="desktop-nav">
       <MenuIcon class="menu-icon" @click="toggleNav" />
-      <router-link class="logo" to="/">Pop</router-link>
+      <router-link class="logo" to="/">POP</router-link>
       <ul class="desktop-nav-ul">
         <li>
           <router-link to="/">Home</router-link>
@@ -61,15 +61,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  // padding-bottom: 100px;
   background-position: right;
-  // background-image: url("../images/map.jpeg");
   background-color: white;
 }
 .menu-icon {
   display: none;
 }
 .logo {
+  font-family: "Coming Soon";
   color: $main-font-color;
   font-weight: bold;
   font-size: 40px;
