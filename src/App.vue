@@ -5,6 +5,7 @@
       <div class="title-container">
         <Title />
       </div>
+      <BrowseButton />
     </div>
 
     <router-view />
@@ -14,12 +15,14 @@
 <script>
 import NavBar from "./components/NavBar";
 import Title from "./components/Title";
+import BrowseButton from "./components/BrowseButton";
 
 export default {
   name: "App",
   components: {
     NavBar,
     Title,
+    BrowseButton,
   },
 };
 </script>
@@ -30,8 +33,10 @@ export default {
 body {
   margin: 0;
   background-image: url("./images/map.jpeg");
+  background-attachment: fixed;
   font-family: $main-font;
   background-size: 100%;
+  scroll-padding-top: 50px;
 }
 
 .title-container {

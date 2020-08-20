@@ -22,4 +22,20 @@ export default {
   width: 550px;
   height: 320px;
 }
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 70px;
+    width: 400px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 550px) {
+  .title {
+    font-size: 40px;
+    width: 300px;
+    height: 150px;
+  }
+}
 </style>

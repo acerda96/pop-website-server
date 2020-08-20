@@ -61,7 +61,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-bottom: 100px;
+  // padding-bottom: 100px;
+  background-position: right;
+  // background-image: url("../images/map.jpeg");
+  background-color: white;
 }
 .menu-icon {
   display: none;
@@ -94,7 +97,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   background: rgb(199, 197, 195);
   position: absolute;
   transition: 300ms ease all;
@@ -102,13 +105,13 @@ li {
   left: -300px;
   top: 60px;
   height: 270px;
-  width: 260px;
+  width: 200px;
 }
 
 @media (max-width: 800px) {
   .menu-icon {
     display: block;
-    padding: 35px 0px 0px 40px;
+    padding: 35px 0px 10px 30px;
   }
   .active {
     left: -30px;
@@ -118,26 +121,7 @@ li {
     display: none;
   }
   .logo {
-    padding: 30px 50px 0px 0px;
-  }
-  .title {
-    font-size: 70px;
-    width: 400px;
-    height: 250px;
-  }
-  .page-container {
-    padding-top: 170px;
-  }
-}
-
-@media (max-width: 550) {
-  .title {
-    font-size: 40px;
-    width: 280px;
-    height: 200px;
-  }
-  .page-container {
-    padding-top: 150px;
+    padding: 20px 25px 0px 0px;
   }
 }
 </style>
