@@ -1,5 +1,27 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <div class="sub-heading">
+      <div class="sub-heading-text">Discover new styles</div>
+    </div>
+    <div class="sec">
+      <img src="../images/image1.jpg" />
+      <div class="text-container">
+        <div class="main-text">See what's on sale</div>
+        <div class="sub-text">
+          Find your next favourite shirt or shoes from nearby stores
+        </div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="text-container">
+        <div class="main-text">See what's on sale</div>
+        <div class="sub-text">
+          Find your next favourite shirt or shoes from nearby stores
+        </div>
+      </div>
+      <img src="../images/image2.jpg" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,7 +35,58 @@ export default {
 .home {
   width: 100%;
   height: 700px;
-  margin-top: 100px;
   background-color: $accent-color;
+  display: grid;
+  grid-template-rows: 350px 500px 500px;
+}
+
+.sub-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-heading-text {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.sec {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-text {
+  font-weight: bold;
+  font-size: 37px;
+  text-align: center;
+}
+
+.sub-text {
+  font-size: 30px;
+  text-align: center;
+}
+
+img {
+  height: 100%;
+}
+
+@media (max-width: 800px) {
+  .sub-heading-text {
+    font-size: 40px;
+  }
+  .home {
+    grid-template-rows: 250px 500px 500px;
+  }
+}
+
+@media (max-width: 550px) {
+  .sub-heading-text {
+    font-size: 28px;
+  }
 }
 </style>

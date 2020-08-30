@@ -39,12 +39,29 @@ body {
   scroll-padding-top: 50px;
 }
 
+#app {
+  display: grid;
+  grid-template-rows: 150px 700px 300px 400px 400px;
+}
+
 .title-container {
   display: flex;
   justify-content: center;
 }
 
 .page-container {
-  padding-top: 220px;
+  padding-top: 110px;
+}
+
+@media (max-width: 800px) {
+  #app {
+    grid-template-rows: 100px 500px 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  #app {
+    grid-template-rows: 80px 400px 100%;
+  }
 }
 </style>
