@@ -4,21 +4,21 @@
       <li>
         <router-link to="/contact">
           <div class="footer-link">
-            <div>Contact Us</div>
+            <div class="link-text">Contact Us</div>
             <Email /></div
         ></router-link>
       </li>
       <li>
         <router-link to="/"
           ><div class="footer-link">
-            <div>Follow Us</div>
+            <div class="link-text">Follow Us</div>
             <Twitter /></div
         ></router-link>
       </li>
       <li>
         <router-link to="/">
           <div class="footer-link">
-            <div>Privacy Statement</div>
+            <div class="link-text">Privacy Statement</div>
             <Information /></div
         ></router-link>
       </li>
@@ -44,7 +44,6 @@ export default {
 
 .footer {
   background: $accent-color;
-
   ul {
     padding-inline-start: 0px;
     margin-block-start: 0px;
@@ -54,24 +53,28 @@ export default {
     text-align: center;
     padding: 0px;
   }
+  a {
+    color: $main-font-color;
+    text-decoration: underline;
+  }
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin-left: -9px;
 }
 
 .footer-link {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-a {
-  color: $main-font-color;
+.link-text {
+  padding-right: 5px;
 }
 
 .copyright {

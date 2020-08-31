@@ -2,6 +2,7 @@
   <div class="not-ready">
     <div class="container">
       <div class="container-title">We're not quite ready yet!</div>
+      <hr />
       <div class="container-info">
         We appreciate your enthusiasm! If you enter your email below, we'll keep
         you updated with our progress on Pop (and give you first access when
@@ -52,10 +53,14 @@ export default {
   input {
     background-color: rgb(193, 224, 189);
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
     padding: 10px;
     max-width: 500px;
     font-family: $main-font;
+  }
+  hr {
+    width: 60%;
+    border-color: black;
   }
 }
 

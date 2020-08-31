@@ -10,7 +10,7 @@
         <li>
           <router-link to="/get-app" class="link">Host</router-link>
         </li>
-        <li>
+        <li @click="scrollMeTo">
           <router-link to="/#about" class="link">About</router-link>
         </li>
         <li>
@@ -27,8 +27,8 @@
         <router-link to="/get-app" class="link">Host</router-link>
       </li>
       <hr />
-      <li>
-        <router-link to="/#home" class="link">About</router-link>
+      <li @click="scrollMeTo">
+        <router-link to="/#about" class="link">About</router-link>
       </li>
       <hr />
       <li>
@@ -51,6 +51,14 @@ export default {
     toggleNav() {
       const nav = this.$refs.nav.classList;
       nav.contains("active") ? nav.remove("active") : nav.add("active");
+    },
+    scrollMeTo() {
+      if (this.$route.fullPath === "/#about") {
+        let el = document.getElementById("about");
+        let top = el.offsetTop;
+
+        window.scrollTo(0, top - 100);
+      }
     },
   },
 };
@@ -116,6 +124,7 @@ hr {
   }
   .link {
     color: white;
+    font-size: 14px;
   }
 }
 
@@ -136,12 +145,6 @@ hr {
   .logo {
     padding: 10px 25px 0px 0px;
     text-decoration: none;
-  }
-}
-
-@media (max-width: 550px) {
-  .link {
-    font-size: 14px;
   }
 }
 </style>
