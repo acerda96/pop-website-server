@@ -1,38 +1,38 @@
 <template>
-  <div class="nav">
-    <nav class="desktop-nav">
+  <div class="navbar">
+    <nav class="upper-nav">
       <MenuIcon class="menu-icon" @click="toggleNav" />
       <router-link class="logo" to="/">POP</router-link>
       <ul class="desktop-nav-ul">
         <li>
-          <router-link to="/">Shop</router-link>
+          <router-link to="/get-app" class="link">Shop</router-link>
         </li>
         <li>
-          <router-link to="/">Host</router-link>
+          <router-link to="/get-app" class="link">Host</router-link>
         </li>
         <li>
-          <router-link to="/about">About</router-link>
+          <router-link to="/#about" class="link">About</router-link>
         </li>
         <li>
-          <router-link to="/contact">Contact Us</router-link>
+          <router-link to="/contact" class="link">Contact Us</router-link>
         </li>
       </ul>
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
       <li>
-        <router-link to="/">Shop</router-link>
+        <router-link to="/get-app" class="link">Shop</router-link>
       </li>
       <hr />
       <li>
-        <router-link to="/">Host</router-link>
+        <router-link to="/get-app" class="link">Host</router-link>
       </li>
       <hr />
       <li>
-        <router-link to="/about">About</router-link>
+        <router-link to="/#home" class="link">About</router-link>
       </li>
       <hr />
       <li>
-        <router-link to="/contact">Contact Us</router-link>
+        <router-link to="/contact" class="link">Contact Us</router-link>
       </li>
       <hr />
     </ul>
@@ -59,15 +59,14 @@ export default {
 <style lang="scss">
 @import "../styles/_variables.scss";
 
-.desktop-nav {
+.upper-nav {
+  background-color: white;
   position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 90px;
-  background-position: right;
-  background-color: white;
+  height: $nav-bar-height;
 }
 .menu-icon {
   display: none;
@@ -77,26 +76,28 @@ export default {
   font-size: 40px;
   padding: 30px 30px 20px 70px;
 }
-.desktop-nav-ul {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px;
+.link {
+  color: $main-font-color;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: underline;
 }
 a {
   text-decoration: none;
-  color: $main-font-color;
-  font-size: 20px;
   padding: 5px;
 }
 li {
   list-style-type: none;
   padding: 10px 20px;
-  text-decoration: underline;
 }
-
 hr {
   width: 150px;
+}
+.desktop-nav-ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
 }
 .mobile-nav-ul {
   display: flex;
@@ -113,6 +114,9 @@ hr {
   a {
     color: white;
   }
+  .link {
+    color: white;
+  }
 }
 
 @media (max-width: 800px) {
@@ -123,13 +127,21 @@ hr {
   .active {
     left: -30px;
   }
-
+  .upper-nav {
+    height: $nav-bar-height-mobile;
+  }
   .desktop-nav-ul {
     display: none;
   }
   .logo {
     padding: 10px 25px 0px 0px;
     text-decoration: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .link {
+    font-size: 14px;
   }
 }
 </style>

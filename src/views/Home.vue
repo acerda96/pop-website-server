@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <div class="sub-heading">
+    <div class="page-container">
+      <div class="title-container">
+        <Title />
+        <BrowseButton />
+      </div>
+    </div>
+    <div id="about">
       <div class="sub-heading-text">Discover new styles</div>
     </div>
     <div class="sec">
@@ -35,8 +41,15 @@
 </template>
 
 <script>
+import Title from "../components/Title";
+import BrowseButton from "../components/BrowseButton";
+
 export default {
   name: "Home",
+  components: {
+    Title,
+    BrowseButton,
+  },
 };
 </script>
 
@@ -45,16 +58,27 @@ export default {
 .home {
   width: 100%;
   height: 100%;
-  background-color: $accent-color;
   display: grid;
-  grid-template-rows: 350px 500px 500px 500px;
-  // padding-bottom: 90px;
+  grid-template-rows: auto 350px 500px 500px 500px;
 }
 
-.sub-heading {
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.page-container {
+  padding-top: 110px;
+}
+
+#about {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: $accent-color;
 }
 
 .sub-heading-text {
@@ -94,7 +118,7 @@ img {
     font-size: 40px;
   }
   .home {
-    grid-template-rows: 250px 400px 400px 400px;
+    grid-template-rows: auto 250px 400px 400px 400px;
   }
   .main-text {
     font-weight: bold;
@@ -109,7 +133,7 @@ img {
 
 @media (max-width: 550px) {
   .home {
-    grid-template-rows: 150px 300px 300px 300px;
+    grid-template-rows: auto 150px 300px 300px 300px;
   }
   .sub-heading-text {
     font-size: 28px;

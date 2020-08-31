@@ -44,6 +44,16 @@ export default {
 
 .footer {
   background: $accent-color;
+
+  ul {
+    padding-inline-start: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+  }
+  li {
+    text-align: center;
+    padding: 0px;
+  }
 }
 
 .footer-links {
@@ -74,6 +84,14 @@ a {
 @media (max-width: 800px) {
   a {
     font-size: 15px;
+  }
+  .copyright {
+    font-size: 12px;
+  }
+}
+@media (max-width: 550px) {
+  a {
+    font-size: 12px;
   }
 }
 </style>

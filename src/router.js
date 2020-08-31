@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import About from "./views/About.vue";
-import Shop from "./views/Shop.vue";
+import ContactUs from "./views/ContactUs.vue";
+import NotReady from "./views/NotReady.vue";
 
 Vue.use(Router);
 
@@ -15,14 +15,24 @@ export default new Router({
       component: Home,
     },
     {
-      path: "/about",
-      name: "about",
-      component: About,
+      path: "/get-app",
+      name: "not-ready",
+      component: NotReady,
     },
     {
-      path: "/shop",
-      name: "shop",
-      component: Shop,
+      path: "/contact",
+      name: "contact-us",
+      component: ContactUs,
     },
   ],
+  scrollBehavior(to) {
+    if (to.hash) {
+      return {
+        selector: to.hash,
+        behavior: "smooth",
+      };
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
 });

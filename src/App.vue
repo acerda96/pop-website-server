@@ -1,14 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
-    <div class="page-container">
-      <div class="title-container">
-        <Title />
-        <BrowseButton />
-      </div>
-
-      <router-view />
-    </div>
+    <router-view />
     <Footer />
   </div>
 </template>
@@ -16,15 +9,11 @@
 <script>
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import Title from "./components/Title";
-import BrowseButton from "./components/BrowseButton";
 
 export default {
   name: "App",
   components: {
     NavBar,
-    Title,
-    BrowseButton,
     Footer,
   },
 };
@@ -40,32 +29,27 @@ body {
   font-family: $main-font;
   background-size: 100%;
   scroll-padding-top: 50px;
+  width: 100%;
+  height: 100%;
+}
+html {
+  width: 100%;
+  height: 100%;
 }
 
 #app {
+  min-height: 100%;
   display: grid;
   grid-template-areas:
     "nav"
     "main"
     "footer";
-  grid-template-rows: 150px auto 130px;
-}
-
-.title-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 100px;
-}
-
-.page-container {
-  padding-top: 110px;
+  grid-template-rows: $nav-bar-height 1fr auto;
 }
 
 @media (max-width: 800px) {
   #app {
-    grid-template-rows: 100px auto 120px;
+    grid-template-rows: $nav-bar-height-mobile 1fr auto;
   }
 }
 </style>
