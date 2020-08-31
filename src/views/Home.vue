@@ -44,10 +44,11 @@ export default {
 @import "../styles/_variables.scss";
 .home {
   width: 100%;
-  height: 700px;
+  height: 100%;
   background-color: $accent-color;
   display: grid;
   grid-template-rows: 350px 500px 500px 500px;
+  // padding-bottom: 90px;
 }
 
 .sub-heading {

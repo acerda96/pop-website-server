@@ -4,16 +4,18 @@
     <div class="page-container">
       <div class="title-container">
         <Title />
+        <BrowseButton />
       </div>
-      <BrowseButton />
-    </div>
 
-    <router-view />
+      <router-view />
+    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import Title from "./components/Title";
 import BrowseButton from "./components/BrowseButton";
 
@@ -23,6 +25,7 @@ export default {
     NavBar,
     Title,
     BrowseButton,
+    Footer,
   },
 };
 </script>
@@ -41,12 +44,19 @@ body {
 
 #app {
   display: grid;
-  grid-template-rows: 150px 700px 300px 400px 400px;
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
+  grid-template-rows: 150px auto 130px;
 }
 
 .title-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
 }
 
 .page-container {
@@ -55,13 +65,7 @@ body {
 
 @media (max-width: 800px) {
   #app {
-    grid-template-rows: 100px 500px 100%;
-  }
-}
-
-@media (max-width: 550px) {
-  #app {
-    grid-template-rows: 80px 400px 100%;
+    grid-template-rows: 100px auto 120px;
   }
 }
 </style>

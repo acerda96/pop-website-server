@@ -83,9 +83,6 @@ export default {
   justify-content: flex-end;
   padding: 10px;
 }
-.mobile-nav-ul {
-  color: white;
-}
 a {
   text-decoration: none;
   color: $main-font-color;
@@ -95,6 +92,7 @@ a {
 li {
   list-style-type: none;
   padding: 10px 20px;
+  text-decoration: underline;
 }
 
 hr {
@@ -112,6 +110,9 @@ hr {
   top: 90px;
   height: 270px;
   width: 200px;
+  a {
+    color: white;
+  }
 }
 
 @media (max-width: 800px) {
@@ -122,14 +123,13 @@ hr {
   .active {
     left: -30px;
   }
-  a {
-    color: white;
-  }
+
   .desktop-nav-ul {
     display: none;
   }
   .logo {
     padding: 10px 25px 0px 0px;
+    text-decoration: none;
   }
 }
 </style>

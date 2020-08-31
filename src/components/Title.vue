@@ -20,7 +20,7 @@ export default {
   color: $main-font-color;
   background-color: rgb(250, 188, 53);
   width: 700px;
-  height: 320px;
+  height: 350px;
 }
 
 @media (max-width: 800px) {
