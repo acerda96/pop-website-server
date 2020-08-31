@@ -47,6 +47,18 @@ html {
   grid-template-rows: $nav-bar-height 1fr auto;
 }
 
+.submit-btn {
+  background-color: $sub-accent-color;
+  width: 100px;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  font-family: $main-font;
+  color: white;
+  align-self: center;
+}
+
 @media (max-width: 800px) {
   #app {
     grid-template-rows: $nav-bar-height-mobile 1fr auto;

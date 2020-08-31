@@ -42,7 +42,7 @@ export default {
   font-size: 20px;
   color: white;
   padding-top: 2px;
-  background-color: rgb(110, 177, 84);
+  background-color: $sub-accent-color;
   border-radius: 10px;
   width: 180px;
   height: 33px;

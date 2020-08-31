@@ -7,7 +7,10 @@
         you updated with our progress on Pop (and give you first access when
         it's ready).
       </div>
-      <input placeholder="Email address" />
+      <div>
+        <input placeholder="Email address" />
+        <button class="submit-btn">Submit</button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../styles/_variables.scss";
 .not-ready {
   display: flex;
   justify-content: center;
@@ -51,6 +55,7 @@ export default {
     border-bottom: 1px solid black;
     padding: 10px;
     max-width: 500px;
+    font-family: $main-font;
   }
 }
 
