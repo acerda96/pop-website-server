@@ -1,7 +1,7 @@
 <template>
   <div class="browse-btn-container">
     <div class="browse-btn-inner">
-      <div class="browse-btn">Browse For Free</div>
+      <div class="browse-btn">Get The App</div>
     </div>
   </div>
 </template>
@@ -40,7 +40,6 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  font-family: "Coming Soon";
   color: white;
   padding-top: 2px;
   background-color: rgb(110, 177, 84);

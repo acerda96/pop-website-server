@@ -16,26 +16,26 @@ export default {
   align-items: center;
   text-align: center;
   font-size: 100px;
-  font-weight: bold;
+  font-family: $title-font;
   color: $main-font-color;
   background-color: rgb(250, 188, 53);
-  width: 550px;
+  width: 700px;
   height: 320px;
 }
 
 @media (max-width: 800px) {
   .title {
     font-size: 70px;
-    width: 400px;
+    width: 500px !important;
     height: 250px;
   }
 }
 
 @media (max-width: 550px) {
   .title {
-    font-size: 40px;
-    width: 300px;
-    height: 150px;
+    font-size: 60px !important;
+    width: 400px !important;
+    height: 200px !important;
   }
 }
 </style>

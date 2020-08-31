@@ -14,12 +14,22 @@
     </div>
     <div class="sec">
       <div class="text-container">
-        <div class="main-text">See what's on sale</div>
+        <div class="main-text">Get directions</div>
         <div class="sub-text">
-          Find your next favourite shirt or shoes from nearby stores
+          When you've found your new fit Pop will show you how to get to the
+          store
         </div>
       </div>
       <img src="../images/image2.jpg" />
+    </div>
+    <div class="sec">
+      <img src="../images/image3.jpg" />
+      <div class="text-container">
+        <div class="main-text">Support local businesses</div>
+        <div class="sub-text">
+          All items are sold by independent sellers
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +47,7 @@ export default {
   height: 700px;
   background-color: $accent-color;
   display: grid;
-  grid-template-rows: 350px 500px 500px;
+  grid-template-rows: 350px 500px 500px 500px;
 }
 
 .sub-heading {
@@ -49,7 +59,6 @@ export default {
 .sub-heading-text {
   text-align: center;
   font-size: 50px;
-  font-weight: bold;
 }
 
 .sec {
@@ -58,6 +67,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.text-container {
+  padding: 20px;
 }
 
 .main-text {
@@ -80,13 +93,34 @@ img {
     font-size: 40px;
   }
   .home {
-    grid-template-rows: 250px 500px 500px;
+    grid-template-rows: 250px 400px 400px 400px;
+  }
+  .main-text {
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+  }
+  .sub-text {
+    font-size: 20px;
+    text-align: center;
   }
 }
 
 @media (max-width: 550px) {
+  .home {
+    grid-template-rows: 150px 300px 300px 300px;
+  }
   .sub-heading-text {
     font-size: 28px;
+  }
+  .main-text {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+  }
+  .sub-text {
+    font-size: 15px;
+    text-align: center;
   }
 }
 </style>
