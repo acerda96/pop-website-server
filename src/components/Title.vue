@@ -33,9 +33,16 @@ export default {
 
 @media (max-width: 550px) {
   .title {
-    font-size: 60px !important;
-    width: 400px !important;
+    font-size: 50px !important;
+    width: 350px !important;
     height: 200px !important;
+  }
+}
+@media (max-width: 380px) {
+  .title {
+    font-size: 43px !important;
+    width: 300px !important;
+    height: 150px !important;
   }
 }
 </style>

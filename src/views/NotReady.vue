@@ -8,7 +8,7 @@
         you updated with our progress on Pop (and give you first access when
         it's ready).
       </div>
-      <form @submit.prevent="submit">
+      <form class="submit" @submit.prevent="submit">
         <input type="text" v-model="email" placeholder="Email address" />
         <button class="submit-btn" type="submit">Submit</button>
       </form>
@@ -101,6 +101,12 @@ export default {
     &-info {
       font-size: 15px;
       padding: 10px;
+    }
+    .submit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

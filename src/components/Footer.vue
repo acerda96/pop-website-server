@@ -5,7 +5,7 @@
         <router-link to="/contact">
           <div class="footer-link">
             <div class="link-text">Contact Us</div>
-            <Email /></div
+            <Email class="icon" /></div
         ></router-link>
       </li>
       <li>
@@ -14,14 +14,14 @@
             <a class="link-text" href="https://twitter.com/Pop_Marketplace">
               Follow Us
             </a>
-            <Twitter /></div
+            <Twitter class="icon" /></div
         ></router-link>
       </li>
       <li>
         <router-link to="/">
           <div class="footer-link">
             <div class="link-text">Privacy Statement</div>
-            <Information /></div
+            <Information class="icon" /></div
         ></router-link>
       </li>
     </ul>
@@ -95,8 +95,17 @@ export default {
   }
 }
 @media (max-width: 550px) {
+  .footer-links {
+    margin-left: 0px;
+  }
   a {
-    font-size: 12px;
+    font-size: 10px;
+  }
+  .link-text {
+    padding-right: 0px;
+  }
+  .icon {
+    display: none;
   }
 }
 </style>

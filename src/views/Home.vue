@@ -60,6 +60,7 @@ export default {
   height: 100%;
   display: grid;
   grid-template-rows: auto 350px 500px 500px 500px;
+  grid-template-columns: 100%;
 }
 
 .title-container {
@@ -71,6 +72,7 @@ export default {
 }
 
 .page-container {
+  width: 100%;
   padding-top: 110px;
 }
 

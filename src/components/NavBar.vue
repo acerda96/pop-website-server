@@ -78,6 +78,7 @@ export default {
 }
 .menu-icon {
   display: none;
+  cursor: pointer;
 }
 .logo {
   color: $main-font-color;
@@ -145,6 +146,16 @@ hr {
   .logo {
     padding: 10px 25px 0px 0px;
     text-decoration: none;
+  }
+}
+@media (max-width: 550px) {
+  .menu-icon {
+    display: block;
+    padding: 15px 0px 10px 30px;
+  }
+  .logo {
+    font-size: 30px;
+    padding: 10px 35px 0px 0px;
   }
 }
 </style>

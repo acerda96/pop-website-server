@@ -43,6 +43,11 @@ export default {
         })
         .then(() => console.log("Contact request added"))
         .catch((err) => console.log(err));
+
+      this.firstName = "";
+      this.lastName = "";
+      this.email = "";
+      this.message = "";
     },
   },
 };

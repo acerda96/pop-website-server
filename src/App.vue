@@ -45,6 +45,7 @@ html {
     "main"
     "footer";
   grid-template-rows: $nav-bar-height 1fr auto;
+  grid-template-columns: 100%;
 }
 
 .submit-btn {
