@@ -21,6 +21,11 @@ mongoose
   .catch((err) => console.log("----- Failed to connect to MongoDB -----", err));
 
 app.use("/api", siteRoutes);
+// Handle production
+if (process.env.NODE_ENV === "production") {
+  // Static folder
+  app.use(express.static(__dirname + "./public"));
+}
 
 const port = process.env.PORT || 5000;
 

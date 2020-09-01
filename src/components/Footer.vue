@@ -11,7 +11,9 @@
       <li>
         <router-link to="/"
           ><div class="footer-link">
-            <div class="link-text">Follow Us</div>
+            <a class="link-text" href="https://twitter.com/Pop_Marketplace">
+              Follow Us
+            </a>
             <Twitter /></div
         ></router-link>
       </li>
