@@ -1,12 +1,12 @@
 const express = require("express");
 const mongodb = require("mongodb");
-const SignUpEmail = require("./models/SignUpEmail");
-const Contact = require("./models/Contact");
+const EmailSignUp = require("./models/EmailSignUp");
+const ContactRequest = require("./models/ContactRequest");
 
 const router = express.Router();
 
 router.post("/email-signup", (req, res) => {
-  const newSignUp = new SignUpEmail({ email: req.body.email });
+  const newSignUp = new EmailSignUp({ email: req.body.email });
   newSignUp
     .save()
     .then((signup) => {
@@ -19,16 +19,16 @@ router.post("/email-signup", (req, res) => {
 });
 
 router.post("/contact", (req, res) => {
-  const newContact = new Contact({ ...req.body });
+  const newContactRequest = new ContactRequest({ ...req.body });
   // FIXME: send email copy here to us
-  newContact
+  newContactRequest
     .save()
-    .then((contact) => {
-      res.status(201).json(contact);
+    .then((contactRequest) => {
+      res.status(201).json(contactRequest);
     })
     .catch((err) => {
       console.log(err.message);
-      res.status(400).json({ error: "Could not add contact" });
+      res.status(400).json({ error: "Could not add contact request" });
     });
 });
 
