@@ -19,19 +19,24 @@
       </ul>
     </nav>
     <ul class="mobile-nav-ul" ref="nav">
-      <li>
+      <li @click="hideNav">
         <router-link to="/get-app" class="link">Shop</router-link>
       </li>
       <hr />
-      <li>
+      <li @click="hideNav">
         <router-link to="/get-app" class="link">Host</router-link>
       </li>
       <hr />
-      <li @click="scrollMeTo">
+      <li
+        @click="
+          scrollMeTo();
+          hideNav();
+        "
+      >
         <router-link to="/#about" class="link">About</router-link>
       </li>
       <hr />
-      <li>
+      <li @click="hideNav">
         <router-link to="/contact" class="link">Contact Us</router-link>
       </li>
       <hr />
@@ -48,6 +53,10 @@ export default {
     MenuIcon,
   },
   methods: {
+    hideNav() {
+      const nav = this.$refs.nav.classList;
+      nav.remove("active");
+    },
     toggleNav() {
       const nav = this.$refs.nav.classList;
       nav.contains("active") ? nav.remove("active") : nav.add("active");
