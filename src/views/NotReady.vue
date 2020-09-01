@@ -8,17 +8,32 @@
         you updated with our progress on Pop (and give you first access when
         it's ready).
       </div>
-      <div>
-        <input placeholder="Email address" />
-        <button class="submit-btn">Submit</button>
-      </div>
+      <form @submit.prevent="submit">
+        <input type="text" v-model="email" placeholder="Email address" />
+        <button class="submit-btn" type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NotReady",
+  data() {
+    return {
+      email: "",
+    };
+  },
+  methods: {
+    submit() {
+      axios
+        .post("api/email-signup", { email: this.email })
+        .then(() => console.log("Email added"))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
 
