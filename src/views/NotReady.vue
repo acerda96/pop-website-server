@@ -32,6 +32,8 @@ export default {
         .post("api/email-signup", { email: this.email })
         .then(() => console.log("Email added"))
         .catch((err) => console.log(err));
+
+      this.email = "";
     },
   },
 };

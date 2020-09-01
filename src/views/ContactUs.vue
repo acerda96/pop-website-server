@@ -2,13 +2,14 @@
   <div class="contact-us">
     <div class="contact-us-box">
       <div class="contact-title">Contact Us</div>
-      <form class="input-container">
+      <form class="input-container" @submit.prevent="submit">
         <div class="names">
-          <input placeholder="First Name" />
-          <input placeholder="Last Name" />
+          <input type="text" v-model="firstName" placeholder="First Name" />
+          <input type="text" v-model="lastName" placeholder="Last Name" />
         </div>
-        <input placeholder="Email" />
+        <input type="text" v-model="email" placeholder="Email" />
         <textarea
+          v-model="message"
           placeholder="Type your message here..."
           class="input-message"
         />
@@ -19,8 +20,31 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "ContactUs",
+  data() {
+    return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      message: "",
+    };
+  },
+  methods: {
+    submit() {
+      axios
+        .post("api/contact", {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          message: this.message,
+        })
+        .then(() => console.log("Contact request added"))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
 
