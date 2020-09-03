@@ -3,7 +3,6 @@ node_modules
 /dist
 secrets.json
 config.js
-server/public
 
 
 # local env files
