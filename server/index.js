@@ -3,14 +3,13 @@ const bodyParse = require("body-parser");
 const cors = require("cors");
 const { MONGO_URI } = require("./config");
 const mongoose = require("mongoose");
-
 const app = express();
+
+const siteRoutes = require("./SiteController");
 
 // Middleware
 app.use(bodyParse.json());
 app.use(cors());
-
-const siteRoutes = require("./SiteController");
 
 mongoose
   .connect(MONGO_URI, {
@@ -21,6 +20,7 @@ mongoose
   .catch((err) => console.log("----- Failed to connect to MongoDB -----", err));
 
 app.use("/api", siteRoutes);
+
 // Handle production
 if (process.env.NODE_ENV === "production") {
   // Static folder
