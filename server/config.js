@@ -1,5 +1,5 @@
-const secrets = require("../secrets.json");
+// const secrets = require("../secrets.json");
 
 module.exports = {
-  MONGO_URI: `mongodb+srv://alexc:${secrets.db_password}@cluster0.n34uv.mongodb.net/test`,
+  MONGO_URI: `mongodb+srv://alexc:Q9hU8sNNX8dCu82@cluster0.n34uv.mongodb.net/test`,
 };
