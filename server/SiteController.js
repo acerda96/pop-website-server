@@ -2,6 +2,8 @@ const express = require("express");
 const mongodb = require("mongodb");
 const EmailSignUp = require("./models/EmailSignUp");
 const ContactRequest = require("./models/ContactRequest");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const router = express.Router();
 
@@ -15,6 +17,28 @@ router.post("/email-signup", (req, res) => {
     .save()
     .then((signup) => {
       res.status(201).json(signup);
+      var transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.SENDER_EMAIL,
+          pass: process.env.PASSWORD,
+        },
+      });
+
+      var mailOptions = {
+        from: process.env.SENDER_EMAIL,
+        to: process.env.RECIPIENT_EMAILS,
+        subject: "POP UPDATE: New user signed up!",
+        html: `<h3> ${req.body.email} </h3> <p> has signed up</p>`,
+      };
+
+      transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
     })
     .catch((err) => {
       console.log(err.message);
@@ -24,11 +48,32 @@ router.post("/email-signup", (req, res) => {
 
 router.post("/contact", (req, res) => {
   const newContactRequest = new ContactRequest({ ...req.body });
-  // FIXME: send email copy here to us
   newContactRequest
     .save()
     .then((contactRequest) => {
       res.status(201).json(contactRequest);
+      var transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.SENDER_EMAIL,
+          pass: process.env.PASSWORD,
+        },
+      });
+
+      var mailOptions = {
+        from: process.env.SENDER_EMAIL,
+        to: process.env.RECIPIENT_EMAILS,
+        subject: "POP UPDATE: New contact request received!",
+        html: `<h3> ${req.body.firstName} ${req.body.lastName}, ${req.body.email} </h3> <p> Says: </p> <h3> ${req.body.message} </h3> <p> Respond now :) </p>`,
+      };
+
+      transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
     })
     .catch((err) => {
       console.log(err.message);
