@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParse = require("body-parser");
 const cors = require("cors");
-const { MONGO_URI } = require("./config");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -15,7 +14,7 @@ app.use(bodyParse.json());
 app.use(cors());
 
 mongoose
-  .connect(MONGO_URI, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
