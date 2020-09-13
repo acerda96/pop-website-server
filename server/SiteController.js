@@ -24,7 +24,7 @@ router.post("/email-signup", (req, res) => {
           pass: process.env.PASSWORD,
         },
       });
-      console.log("ENVS", process.env.SENDER_EMAIL);
+
       var mailOptions = {
         from: process.env.SENDER_EMAIL,
         to: process.env.RECIPIENT_EMAILS,
@@ -59,8 +59,6 @@ router.post("/contact", (req, res) => {
           pass: process.env.PASSWORD,
         },
       });
-
-      console.log("ENVS", process.env.SENDER_EMAIL);
 
       var mailOptions = {
         from: process.env.SENDER_EMAIL,
