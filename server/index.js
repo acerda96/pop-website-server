@@ -7,6 +7,8 @@ const app = express();
 
 const siteRoutes = require("./controllers/SiteController");
 const userRoutes = require("./controllers/account/AccountController");
+const itemsRoutes = require("./controllers/items/ItemsController");
+const storesRoutes = require("./controllers/stores/StoreController");
 
 // Middleware
 app.use(bodyParse.json());
@@ -22,6 +24,8 @@ mongoose
 
 app.use("/api", siteRoutes);
 app.use("/api/account", userRoutes);
+app.use("/api/items", itemsRoutes);
+app.use("/api/stores", storesRoutes);
 
 const port = process.env.PORT || 5000;
 
