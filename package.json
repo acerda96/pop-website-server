@@ -15,7 +15,12 @@
     "express": "^4.17.1",
     "mongodb": "^3.6.0",
     "mongoose": "^5.10.2",
-    "nodemailer": "^6.4.11"
+    "nodemailer": "^6.4.11",
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

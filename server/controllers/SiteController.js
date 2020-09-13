@@ -1,7 +1,7 @@
 const express = require("express");
 const mongodb = require("mongodb");
-const EmailSignUp = require("./models/EmailSignUp");
-const ContactRequest = require("./models/ContactRequest");
+const EmailSignUp = require("../models/EmailSignUp");
+const ContactRequest = require("../models/ContactRequest");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 

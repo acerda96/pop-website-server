@@ -5,7 +5,8 @@ const { MONGO_URI } = require("./config");
 const mongoose = require("mongoose");
 const app = express();
 
-const siteRoutes = require("./SiteController");
+const siteRoutes = require("./controllers/SiteController");
+const userRoutes = require("./controllers/account/AccountController");
 
 // Middleware
 app.use(bodyParse.json());
@@ -20,16 +21,7 @@ mongoose
   .catch((err) => console.log("----- Failed to connect to MongoDB -----", err));
 
 app.use("/api", siteRoutes);
-
-// // Handle production
-// if (process.env.NODE_ENV === "production") {
-//   // Static folder
-//   app.use(express.static(__dirname + "/public/"));
-
-//   // Handle SPA
-//   // refers to any route, so it doesnt look for a page like in a MPA
-//   app.get(/.*/, (req, res) => res.sendFile(__dirname + "./public/index.html"));
-// }
+app.use("/api/account", userRoutes);
 
 const port = process.env.PORT || 5000;
 
