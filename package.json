@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js",
+    "api": "nodemon server/index.js",
     "deploy": "git push --force heroku master"
   },
   "dependencies": {

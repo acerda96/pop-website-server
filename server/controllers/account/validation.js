@@ -7,8 +7,8 @@ const registerSchema = Joi.object({
   email: Joi.string().min(6).required().email(),
   name: Joi.string().min(2).required(),
   surname: Joi.string().min(2).required(),
-  phoneNumber: Joi.string().min(6).required(),
-  brandName: Joi.string().min(2).required(),
+  mobileNumber: Joi.string().min(6).required(),
+  company: Joi.string().min(2).required(),
   password: Joi.string().min(6).required(),
   confirmPassword: Joi.string().min(6).required(),
 });
@@ -29,7 +29,6 @@ async function validateRegister(req, res, next) {
     res.status(400).json({ error: "Email already taken" });
     return;
   }
-
   if (req.body.password !== req.body.confirmPassword) {
     res.status(400).json({ error: "Passwords must match" });
     return;

@@ -19,8 +19,8 @@ router.post("/register", validateRegister, async (req, res) => {
   newUser
     .save()
     .then((user) => {
-      console.log("USER", user);
-      res.status(200).json({ id: user.id });
+      const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
+      res.status(200).json({ token, userId: user._id });
     })
     .catch((err) => {
       console.log("ERR", err);

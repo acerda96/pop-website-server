@@ -15,11 +15,11 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  phoneNumber: {
+  mobileNumber: {
     type: String,
     required: true,
   },
-  brandName: {
+  company: {
     type: String,
     required: false,
   },
