@@ -7,9 +7,9 @@ const Joi = require("@hapi/joi");
 const { upload } = require("./multer-upload");
 
 const searchSchema = Joi.object({
-  sortCriterion: Joi.number().required(),
-  page: Joi.number().required(),
-  size: Joi.number().required(),
+  sortCriterion: Joi.number(),
+  // page: Joi.number().required(),
+  // size: Joi.number().required(),
   type: Joi.number(),
   storeId: Joi.string(),
 });
@@ -83,20 +83,20 @@ router.get("/", async (req, res) => {
   }
   try {
     let items;
-    const filterParams = {};
+    let filterParams = {};
     if (params.storeId) filterParams.storeId = params.storeId;
-    if (params.type) filterParams.type = params.type;
+    if (params.type > 0) filterParams.type = params.type;
+    filterParams = Object.keys(filterParams).length === 0 ? null : filterParams;
 
-    if (params.sortCriterion === 1) {
+    if (params.sortCriterion == 1) {
       items = await Item.find(filterParams).sort({ unitPrice: 1 });
     } else {
       items = await Item.find(filterParams).sort({ $natural: -1 });
     }
     if (!items) throw Error;
+    res.status(200).json(items);
 
-    console.log(items.length);
-
-    res.status(200).json(items.slice(params.page * params.size, params.size));
+    // res.status(200).json(items.slice(params.page * params.size, params.size));
   } catch (err) {
     res.status(404).json({ error: "Items could not be retrieved" });
   }
