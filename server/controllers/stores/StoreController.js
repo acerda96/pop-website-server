@@ -18,14 +18,24 @@ router.get("/:id", (req, res) => {
 
 //@routes GET api/stores
 //@desc Get stores
-router.get("/", (_req, res) => {
-  Store.find()
-    .then((stores) => {
-      res.status(200).json(stores);
-    })
-    .catch((err) => {
-      res.status(400).json({ error: "Could not retrieve stores" });
-    });
+router.get("/", (req, res) => {
+  if (req.query.userId) {
+    Store.find({ userId: req.query.userId })
+      .then((stores) => {
+        res.status(200).json(stores);
+      })
+      .catch((err) => {
+        res.status(400).json({ error: "Could not retrieve stores" });
+      });
+  } else {
+    Store.find()
+      .then((stores) => {
+        res.status(200).json(stores);
+      })
+      .catch((err) => {
+        res.status(400).json({ error: "Could not retrieve stores" });
+      });
+  }
 });
 
 //@routes POST api/stores

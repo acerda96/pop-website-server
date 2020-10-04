@@ -73,8 +73,10 @@ router.delete("/:id", verifyToken, (req, res) => {
 
 //@routes POST api/item/search
 //@desc Get items
-router.post("/search", async (req, res) => {
-  const { error } = searchSchema.validate(req.body);
+router.get("/", async (req, res) => {
+  const params = req.query;
+  const { error } = searchSchema.validate(params);
+
   if (error && error.details[0].message) {
     res.status(400).json({ error: error.details[0].message });
     return;
@@ -82,7 +84,8 @@ router.post("/search", async (req, res) => {
   try {
     let items;
     // apply sortCriterion
-    if (req.body.sortCriterion === 1) {
+    if (params.sortCriterion && params.sortCriterion === 1) {
+      // ascending price order
       items = await Item.find().sort({ unitPrice: 1 });
     } else {
       items = await Item.find().sort({ $natural: -1 });
@@ -90,17 +93,12 @@ router.post("/search", async (req, res) => {
     if (!items) throw Error;
 
     // apply type
-    if (req.body.type !== 0) {
-      items = items.filter((item) => item.type === req.body.type);
+    if (params.type && params.type !== 0) {
+      items = items.filter((item) => item.type === params.type);
     }
     // apply storeId
-    if (req.body.storeId) {
-      items = items.filter((item) => item.storeId === req.body.storeId);
-    }
 
-    res
-      .status(200)
-      .json(items.slice(req.body.page * req.body.size, req.body.size));
+    res.status(200).json(items.slice(params.page * params.size, params.size));
   } catch (err) {
     res.status(404).json({ error: "Items could not be retrieved" });
   }

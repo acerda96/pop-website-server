@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const app = express();
 
 const siteRoutes = require("./controllers/SiteController");
-const userRoutes = require("./controllers/account/AccountController");
+const accountRoutes = require("./controllers/account/AccountController");
+const individualRoutes = require("./controllers/account/IndividualController");
 const itemsRoutes = require("./controllers/items/ItemsController");
 const storesRoutes = require("./controllers/stores/StoreController");
 
@@ -22,7 +23,8 @@ mongoose
   .catch((err) => console.log("----- Failed to connect to MongoDB -----", err));
 
 app.use("/api", siteRoutes);
-app.use("/api/account", userRoutes);
+app.use("/api/individual", individualRoutes);
+app.use("/api/account", accountRoutes);
 app.use("/api/items", itemsRoutes);
 app.use("/api/stores", storesRoutes);
 
