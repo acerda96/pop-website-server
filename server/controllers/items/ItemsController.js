@@ -10,7 +10,7 @@ const searchSchema = Joi.object({
   sortCriterion: Joi.number().required(),
   page: Joi.number().required(),
   size: Joi.number().required(),
-  type: Joi.number().required(),
+  type: Joi.number(),
   storeId: Joi.string(),
 });
 
@@ -83,20 +83,18 @@ router.get("/", async (req, res) => {
   }
   try {
     let items;
-    // apply sortCriterion
-    if (params.sortCriterion && params.sortCriterion === 1) {
-      // ascending price order
-      items = await Item.find().sort({ unitPrice: 1 });
+    const filterParams = {};
+    if (params.storeId) filterParams.storeId = params.storeId;
+    if (params.type) filterParams.type = params.type;
+
+    if (params.sortCriterion === 1) {
+      items = await Item.find(filterParams).sort({ unitPrice: 1 });
     } else {
-      items = await Item.find().sort({ $natural: -1 });
+      items = await Item.find(filterParams).sort({ $natural: -1 });
     }
     if (!items) throw Error;
 
-    // apply type
-    if (params.type && params.type !== 0) {
-      items = items.filter((item) => item.type === params.type);
-    }
-    // apply storeId
+    console.log(items.length);
 
     res.status(200).json(items.slice(params.page * params.size, params.size));
   } catch (err) {
