@@ -8,7 +8,6 @@ const verifyToken = require("../../utils/verifyToken");
 //@desc Register user
 
 router.get("/", verifyToken, (req, res) => {
-  console.log(req.user);
   User.findById(req.user.id)
     .then((user) => {
       res.status(200).json(user);

@@ -28,7 +28,7 @@ const StoreSchema = new Schema({
   },
   type: {
     type: Number,
-    required: true,
+    required: false,
   },
   website: {
     type: String,
