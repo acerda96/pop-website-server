@@ -11,10 +11,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  surname: {
-    type: String,
-    required: true,
-  },
   mobileNumber: {
     type: String,
     required: true,
@@ -30,6 +26,10 @@ const UserSchema = new Schema({
   isEmailConfirmed: {
     type: Boolean,
     default: false,
+  },
+  savedItems: {
+    type: Array,
+    default: [],
   },
   createdAt: {
     type: Date,

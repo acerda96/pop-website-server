@@ -14,7 +14,7 @@ const searchSchema = Joi.object({
   storeId: Joi.string(),
 });
 
-//@routes GET api/item/:id
+//@routes GET api/items/:id
 //@desc Get item by id
 router.get("/:id", (req, res) => {
   Item.findById(req.params.id)
@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//@routes POST api/item
+//@routes POST api/items
 //@desc Add an item
 router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
   Store.findById(req.body.storeId)
@@ -54,7 +54,7 @@ router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
     .catch(() => res.status(400).json({ error: "Store could not be found" }));
 });
 
-//@routes DELETE api/item
+//@routes DELETE api/items
 //@desc Delete an item
 router.delete("/:id", verifyToken, (req, res) => {
   Item.findById(req.params.id)
@@ -71,7 +71,7 @@ router.delete("/:id", verifyToken, (req, res) => {
     });
 });
 
-//@routes POST api/item/search
+//@routes POST api/items
 //@desc Get items
 router.get("/", async (req, res) => {
   const params = req.query;
