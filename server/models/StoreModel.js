@@ -14,9 +14,13 @@ const StoreSchema = new Schema({
     type: String,
     required: true,
   },
-  street: {
+  addressLine1: {
     type: String,
     required: true,
+  },
+  addressLine2: {
+    type: String,
+    required: false,
   },
   postcode: {
     type: String,
@@ -29,6 +33,11 @@ const StoreSchema = new Schema({
   type: {
     type: Number,
     required: false,
+  },
+  dates: {
+    type: Array,
+    required: false,
+    default: [],
   },
   website: {
     type: String,

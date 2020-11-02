@@ -42,7 +42,6 @@ router.get("/", (req, res) => {
 //@desc Add a store
 router.post("/", verifyToken, (req, res) => {
   const newStore = new Store({ ...req.body, userId: req.user.id });
-  console.log(newStore);
   newStore
     .save()
     .then((store) => {
@@ -51,6 +50,22 @@ router.post("/", verifyToken, (req, res) => {
     .catch((err) => {
       console.log(err.message);
       res.status(400).json({ error: "Could not add store" });
+    });
+});
+
+//@routes PUT api/stores
+//@desc Edit a store
+router.put("/:id", verifyToken, (req, res) => {
+  Store.findById(req.params.id)
+    .then((store) => {
+      if (req.body.date) {
+        store.dates.push(req.body.date);
+      }
+      store.save();
+      res.status(200).json(store);
+    })
+    .catch(() => {
+      res.status(404).json({ error: "Store could not be found" });
     });
 });
 
