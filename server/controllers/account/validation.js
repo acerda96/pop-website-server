@@ -49,7 +49,7 @@ async function validateLogin(req, res, next) {
     return;
   }
 
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  const validPassword = validatePassword(req.body.password, user.password);
   if (!validPassword) {
     res.status(400).json({ error: "Invalid email or password" });
     return;
@@ -58,4 +58,8 @@ async function validateLogin(req, res, next) {
   next();
 }
 
-module.exports = { validateRegister, validateLogin };
+async function validatePassword(storedPassword, inputPassword) {
+  return await bcrypt.compare(storedPassword, inputPassword);
+}
+
+module.exports = { validateRegister, validateLogin, validatePassword };

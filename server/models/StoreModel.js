@@ -16,7 +16,7 @@ const StoreSchema = new Schema({
   },
   addressLine1: {
     type: String,
-    required: true,
+    required: false,
   },
   addressLine2: {
     type: String,
@@ -24,11 +24,11 @@ const StoreSchema = new Schema({
   },
   postcode: {
     type: String,
-    required: true,
+    required: false,
   },
   city: {
     type: String,
-    required: true,
+    required: false,
   },
   type: {
     type: Number,

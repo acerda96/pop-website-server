@@ -40,8 +40,7 @@ router.post("/email-signup", (req, res) => {
         }
       });
     })
-    .catch((err) => {
-      console.log(err.message);
+    .catch(() => {
       res.status(400).json({ error: "Could not add email" });
     });
 });
@@ -75,8 +74,7 @@ router.post("/contact", (req, res) => {
         }
       });
     })
-    .catch((err) => {
-      console.log(err.message);
+    .catch(() => {
       res.status(400).json({ error: "Could not add contact request" });
     });
 });

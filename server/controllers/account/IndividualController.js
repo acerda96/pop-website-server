@@ -13,7 +13,7 @@ router.get("/", verifyToken, (req, res) => {
     .then((user) => {
       res.status(200).json(user);
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(400).json({ error: "Could not retrieve user" });
     });
 });
@@ -35,7 +35,7 @@ router.put("/", verifyToken, (req, res) => {
       }
       res.status(200).json(user);
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(400).json({ error: "Could not retrieve user" });
     });
 });
@@ -44,13 +44,12 @@ router.get("/saved-items", verifyToken, (req, res) => {
   User.findById(req.user.id)
     .then((user) => {
       const savedItemIds = user.savedItems;
-      console.log(savedItemIds);
+
       Item.find({ _id: { $in: savedItemIds } }).then((savedItems) => {
-        console.log("SAVED", savedItems);
         res.status(200).json(savedItems);
       });
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(400).json({ error: "Could not retrieve saved items" });
     });
 });

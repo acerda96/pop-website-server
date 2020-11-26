@@ -47,8 +47,7 @@ router.post("/", verifyToken, (req, res) => {
     .then((store) => {
       res.status(201).json(store);
     })
-    .catch((err) => {
-      console.log(err.message);
+    .catch(() => {
       res.status(400).json({ error: "Could not add store" });
     });
 });
@@ -60,6 +59,21 @@ router.put("/:id", verifyToken, (req, res) => {
     .then((store) => {
       if (req.body.date) {
         store.dates.push(req.body.date);
+      }
+      if (req.body.name) {
+        store.name = req.body.name;
+      }
+      if (req.body.description) {
+        store.description = req.body.description;
+      }
+      if (req.body.addressLine1) {
+        store.addressLine1 = req.body.addressLine1;
+      }
+      if (req.body.addressLine2) {
+        store.addressLine2 = req.body.addressLine2;
+      }
+      if (req.body.postCode) {
+        store.postCode = req.body.postCode;
       }
       store.save();
       res.status(200).json(store);
