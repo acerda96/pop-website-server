@@ -1,9 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const Item = require("../../models/ItemModel");
-const Store = require("../../models/StoreModel");
-const verifyToken = require("../../utils/verifyToken");
+import express from "express";
+import Item from "../models/ItemModel";
+import Store from "../models/StoreModel";
+import verifyToken from "../utils/verifyToken";
+import StoreInterface from "../types/Store"
 
+const router = express.Router();
 //@routes GET api/stores/:id
 //@desc Get store by id
 router.get("/:id", (req, res) => {
@@ -40,7 +41,7 @@ router.get("/", (req, res) => {
 
 //@routes POST api/stores
 //@desc Add a store
-router.post("/", verifyToken, (req, res) => {
+router.post("/", verifyToken, (req:any, res) => {
   const newStore = new Store({ ...req.body, userId: req.user.id });
   newStore
     .save()
@@ -56,7 +57,7 @@ router.post("/", verifyToken, (req, res) => {
 //@desc Edit a store
 router.put("/:id", verifyToken, (req, res) => {
   Store.findById(req.params.id)
-    .then((store) => {
+    .then((store :any) => {
       if (req.body.date) {
         store.dates.push(req.body.date);
       }
@@ -72,8 +73,8 @@ router.put("/:id", verifyToken, (req, res) => {
       if (req.body.addressLine2) {
         store.addressLine2 = req.body.addressLine2;
       }
-      if (req.body.postCode) {
-        store.postCode = req.body.postCode;
+      if (req.body.postcode) {
+        store.postcode = req.body.postcode;
       }
       store.save();
       res.status(200).json(store);
@@ -87,7 +88,7 @@ router.put("/:id", verifyToken, (req, res) => {
 //@desc Delete a store
 router.delete("/:id", verifyToken, (req, res) => {
   Store.findById(req.params.id)
-    .then((store) => {
+    .then((store :any) => {
       if (store.userId === req.user.id) {
         store.delete();
         Item.deleteMany({ storeId: store.id })
@@ -104,4 +105,4 @@ router.delete("/:id", verifyToken, (req, res) => {
     });
 });
 
-module.exports = router;
+export default  router;

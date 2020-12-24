@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../../models/UserModel");
-const Item = require("../../models/ItemModel");
+import express from "express";
+import User from "../models/UserModel";
+import Item from "../models/ItemModel";
+import verifyToken from "../utils/verifyToken";
 
-const verifyToken = require("../../utils/verifyToken");
+const router = express.Router();
 
 //@routes GET api/individual
 //@desc Get individual from token
@@ -22,7 +22,7 @@ router.get("/", verifyToken, (req, res) => {
 //@desc Update individual
 router.put("/", verifyToken, (req, res) => {
   User.findById(req.user.id)
-    .then((user) => {
+    .then((user:any) => {
       if (req.body.itemId) {
         if (!user.savedItems.some((item) => item === req.body.itemId)) {
           user.savedItems.push(req.body.itemId);
@@ -42,7 +42,7 @@ router.put("/", verifyToken, (req, res) => {
 
 router.get("/saved-items", verifyToken, (req, res) => {
   User.findById(req.user.id)
-    .then((user) => {
+    .then((user:any) => {
       const savedItemIds = user.savedItems;
 
       Item.find({ _id: { $in: savedItemIds } }).then((savedItems) => {
@@ -54,4 +54,4 @@ router.get("/saved-items", verifyToken, (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

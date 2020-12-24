@@ -1,7 +1,6 @@
-const User = require("../../models/UserModel");
-const bcrypt = require("bcryptjs");
-const Joi = require("@hapi/joi");
-const jwt = require("jsonwebtoken");
+import User from "../models/UserModel";
+import bcrypt from "bcryptjs";
+import Joi from "@hapi/joi";
 
 const registerSchema = Joi.object({
   email: Joi.string().min(6).required().email(),
@@ -43,7 +42,8 @@ async function validateLogin(req, res, next) {
     return;
   }
 
-  const user = await User.findOne({ email: req.body.email.toLowerCase() });
+  const user  = await User.findOne({ email: req.body.email.toLowerCase() });
+
   if (!user) {
     res.status(400).json({ error: "Invalid email or password" });
     return;
@@ -62,4 +62,4 @@ async function validatePassword(storedPassword, inputPassword) {
   return await bcrypt.compare(storedPassword, inputPassword);
 }
 
-module.exports = { validateRegister, validateLogin, validatePassword };
+export default { validateRegister, validateLogin, validatePassword };

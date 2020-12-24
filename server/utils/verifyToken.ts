@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = async function verifyToken(req, res, next) {
+export default async function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) res.status(401).send({ error: "Unauthorized" });

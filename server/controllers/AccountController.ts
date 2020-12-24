@@ -1,16 +1,14 @@
-const express = require("express");
+import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/UserModel";
+import Item from "../models/ItemModel";
+import Store from "../models/StoreModel";
+import validation from "../utils/validation";
+import verifyToken from "../utils/verifyToken";
+
+const { validateRegister, validateLogin, validatePassword } = validation
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../../models/UserModel");
-const Item = require("../../models/ItemModel");
-const Store = require("../../models/StoreModel");
-const {
-  validateRegister,
-  validateLogin,
-  validatePassword,
-} = require("./validation");
-const verifyToken = require("../../utils/verifyToken");
 
 //@routes POST api/account/register
 //@desc Register user
@@ -68,4 +66,4 @@ router.delete("/", verifyToken, async (req, res) => {
     );
 });
 
-module.exports = router;
+export default  router;

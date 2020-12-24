@@ -1,9 +1,7 @@
-const express = require("express");
-const mongodb = require("mongodb");
-const EmailSignUp = require("../models/EmailSignUp");
-const ContactRequest = require("../models/ContactRequest");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import express from "express";
+import EmailSignUp from "../models/EmailSignUp";
+import ContactRequest from "../models/ContactRequest";
+import nodemailer from "nodemailer";
 
 const router = express.Router();
 
@@ -79,4 +77,4 @@ router.post("/contact", (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

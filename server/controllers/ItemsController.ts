@@ -1,10 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const Item = require("../../models/ItemModel");
-const Store = require("../../models/StoreModel");
-const verifyToken = require("../../utils/verifyToken");
-const Joi = require("@hapi/joi");
-const { upload } = require("./multer-upload");
+import express from "express";
+import Item from "../models/ItemModel";
+import Store from "../models/StoreModel";
+import verifyToken from "../utils/verifyToken";
+import Joi from "@hapi/joi";
+import upload from "../utils/multer-upload";
 
 const searchSchema = Joi.object({
   sortCriterion: Joi.number(),
@@ -13,6 +12,8 @@ const searchSchema = Joi.object({
   type: Joi.number(),
   storeId: Joi.string(),
 });
+
+const router = express.Router();
 
 //@routes GET api/items/:id
 //@desc Get item by id
@@ -30,7 +31,8 @@ router.get("/:id", (req, res) => {
 //@desc Add an item
 router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
   Store.findById(req.body.storeId)
-    .then((store) => {
+    .then((store:any) => {
+      console.log("AFTER FILE", req.files);
       if (store.userId !== req.user.id)
         res.status(401).json({ error: "Unauthorized" });
       else {
@@ -53,11 +55,45 @@ router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
     .catch(() => res.status(400).json({ error: "Store could not be found" }));
 });
 
+//@routes POST api/items
+//@desc Add an item
+router.post(
+  "/upload/new",
+  verifyToken,
+  upload.array("images", 4),
+  (req, res) => {
+    Store.findById(req.body.storeId)
+      .then((store:any) => {
+        console.log(req.user.id);
+        console.log(store.userId);
+        if (store.userId !== req.user.id)
+          res.status(401).json({ error: "Unauthorized" });
+        else {
+          const newItem = new Item({
+            ...req.body,
+            userId: req.user.id,
+            currentQuantity: req.body.initialQuantity,
+            images: req.files,
+          });
+          newItem
+            .save()
+            .then((item) => {
+              res.status(201).json(item);
+            })
+            .catch(() => {
+              res.status(400).json({ error: "Item could not be added" });
+            });
+        }
+      })
+      .catch(() => res.status(400).json({ error: "Store could not be found" }));
+  }
+);
+
 //@routes DELETE api/items
 //@desc Delete an item
 router.delete("/:id", verifyToken, (req, res) => {
   Item.findById(req.params.id)
-    .then((item) => {
+    .then((item:any) => {
       if (item.userId === req.user.id) {
         item.delete();
         res.status(204).send();
@@ -82,17 +118,17 @@ router.get("/", async (req, res) => {
   }
   try {
     let items;
-    let filterParams = {};
-    if (params.storeId) filterParams.storeId = params.storeId;
-    if (params.type > 0) filterParams.type = params.type;
-    filterParams = Object.keys(filterParams).length === 0 ? null : filterParams;
+    // let filterParams = {};
+    // if (params.storeId) filterParams.storeId = params.storeId;
+    // if (params.type > 0) filterParams.type = params.type;
+    // filterParams = Object.keys(filterParams).length === 0 ? null : filterParams;
 
-    if (params.sortCriterion == 1) {
-      items = await Item.find(filterParams).sort({ unitPrice: 1 });
-    } else {
-      items = await Item.find(filterParams).sort({ $natural: -1 });
-    }
-    if (!items) throw Error;
+    // if (params.sortCriterion == 1) {
+    //   items = await Item.find(filterParams).sort({ unitPrice: 1 });
+    // } else {
+    //   items = await Item.find(filterParams).sort({ $natural: -1 });
+    // }
+    // if (!items) throw Error;
     res.status(200).json(items);
 
     // res.status(200).json(items.slice(params.page * params.size, params.size));
@@ -101,4 +137,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default  router;
