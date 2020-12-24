@@ -5,11 +5,12 @@ import verifyToken from "../utils/verifyToken";
 import Joi from "@hapi/joi";
 import upload from "../utils/multer-upload";
 
+const RESULTS_PER_PAGE = 10;
+
 const searchSchema = Joi.object({
   sortCriterion: Joi.number(),
-  // page: Joi.number().required(),
-  // size: Joi.number().required(),
-  type: Joi.number(),
+  page: Joi.number(),
+  size: Joi.number(),
   storeId: Joi.string(),
 });
 
@@ -109,29 +110,27 @@ router.delete("/:id", verifyToken, (req, res) => {
 //@routes POST api/items
 //@desc Get items
 router.get("/", async (req, res) => {
-  const params = req.query;
-  const { error } = searchSchema.validate(params);
+  const { error } = searchSchema.validate(req.query);
 
   if (error && error.details[0].message) {
     res.status(400).json({ error: error.details[0].message });
     return;
   }
+
+  const sortCriterion : number = Number(req.query.sortCriterion);
+  const page = Number(req.query.page) || 0;
+  const size = Number(req.query.size) || RESULTS_PER_PAGE;
+
+  const sortTerm = {}
+  sortCriterion === 1 ? sortTerm["unitPrice"] = 1 : sortTerm["$natural"] = -1
+
   try {
-    let items;
-    // let filterParams = {};
-    // if (params.storeId) filterParams.storeId = params.storeId;
-    // if (params.type > 0) filterParams.type = params.type;
-    // filterParams = Object.keys(filterParams).length === 0 ? null : filterParams;
-
-    // if (params.sortCriterion == 1) {
-    //   items = await Item.find(filterParams).sort({ unitPrice: 1 });
-    // } else {
-    //   items = await Item.find(filterParams).sort({ $natural: -1 });
-    // }
-    // if (!items) throw Error;
+    const items = await Item.find()
+    .sort(sortTerm)
+    .skip(RESULTS_PER_PAGE * page)
+    .limit(size);
+    
     res.status(200).json(items);
-
-    // res.status(200).json(items.slice(params.page * params.size, params.size));
   } catch (err) {
     res.status(404).json({ error: "Items could not be retrieved" });
   }
