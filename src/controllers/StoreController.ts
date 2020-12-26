@@ -2,6 +2,19 @@ import express from "express";
 import Item from "../models/ItemModel";
 import Store from "../models/StoreModel";
 import verifyToken from "../utils/verifyToken";
+import Joi from "@hapi/joi";
+import splitCamelCase from "../utils/helpers";
+
+const storeSchema = Joi.object({
+  name: Joi.string().min(1).required(),
+  description: Joi.string().min(1).required(),
+  addressLine1: Joi.string().allow("").optional(),
+  addressLine2: Joi.string().allow("").optional(),
+  city: Joi.string().allow("").optional(),
+  postcode: Joi.string().allow("").optional(),
+  website: Joi.string().allow("").optional(),
+  position: Joi.object().optional(),
+});
 
 const router = express.Router();
 
@@ -36,6 +49,17 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", verifyToken, (req: any, res) => {
+  const { error } = storeSchema.validate(req.body);
+
+  if (error && error.details[0].message) {
+    const field = error.details[0].path[0];
+
+    let message = error.details[0].message;
+    message = message.replace(`${field}`, splitCamelCase(field));
+
+    return res.status(400).json({ error: message });
+  }
+
   const newStore = new Store({
     ...req.body,
     userId: req.user.id,

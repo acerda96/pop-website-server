@@ -20,9 +20,9 @@ const ItemsSchema = new Schema({
   },
   initialQuantity: {
     type: Number,
-    required: true,
+    required: false,
   },
-  unitPrice: {
+  price: {
     type: Number,
     required: true,
   },
