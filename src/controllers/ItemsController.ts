@@ -83,23 +83,36 @@ router.delete("/:id", verifyToken, (req, res) => {
     });
 });
 
-router.put("/:id", verifyToken, (req, res) => {
+router.put("/:id", verifyToken, upload.array("images", 4), (req, res) => {
   Item.findById(req.params.id)
     .then((item: any) => {
-      const fields = ["name", "description", "price", "initialQuantity"];
+      if (req.files) {
+        item.images = req.files;
+      } else {
+        const fields = ["name", "description", "price", "initialQuantity"];
 
-      fields.forEach((field) => {
-        if (req.body.hasOwnProperty(field)) {
-          item[field] = req.body[field];
-        }
-      });
+        fields.forEach((field) => {
+          if (req.body.hasOwnProperty(field)) {
+            item[field] = req.body[field];
+          }
+        });
+      }
 
       item.status = "pending";
 
-      item.save();
+      item
+        .save()
+        .then((savedItem) => {
+          return res.status(201).json(savedItem);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(400).json({ error: "Item could not saved" });
+        });
       return res.status(200).json(item);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       return res.status(404).json({ error: "Item could not be found" });
     });
 });
