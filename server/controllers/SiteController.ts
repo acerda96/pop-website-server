@@ -1,9 +1,7 @@
-const express = require("express");
-const mongodb = require("mongodb");
-const EmailSignUp = require("./models/EmailSignUp");
-const ContactRequest = require("./models/ContactRequest");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import express from "express";
+import EmailSignUp from "../models/EmailSignUp";
+import ContactRequest from "../models/ContactRequest";
+import nodemailer from "nodemailer";
 
 const router = express.Router();
 
@@ -24,7 +22,7 @@ router.post("/email-signup", (req, res) => {
           pass: process.env.PASSWORD,
         },
       });
-      console.log("ENVS", process.env.SENDER_EMAIL);
+
       var mailOptions = {
         from: process.env.SENDER_EMAIL,
         to: process.env.RECIPIENT_EMAILS,
@@ -40,8 +38,7 @@ router.post("/email-signup", (req, res) => {
         }
       });
     })
-    .catch((err) => {
-      console.log(err.message);
+    .catch(() => {
       res.status(400).json({ error: "Could not add email" });
     });
 });
@@ -60,8 +57,6 @@ router.post("/contact", (req, res) => {
         },
       });
 
-      console.log("ENVS", process.env.SENDER_EMAIL);
-
       var mailOptions = {
         from: process.env.SENDER_EMAIL,
         to: process.env.RECIPIENT_EMAILS,
@@ -77,10 +72,9 @@ router.post("/contact", (req, res) => {
         }
       });
     })
-    .catch((err) => {
-      console.log(err.message);
+    .catch(() => {
       res.status(400).json({ error: "Could not add contact request" });
     });
 });
 
-module.exports = router;
+export default router;

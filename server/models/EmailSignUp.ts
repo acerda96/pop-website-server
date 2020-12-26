@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const EmailSignUpSchema = new Schema({
@@ -9,4 +8,4 @@ const EmailSignUpSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("EmailSignUp", EmailSignUpSchema);
+export default mongoose.model("EmailSignUp", EmailSignUpSchema);
