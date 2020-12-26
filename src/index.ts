@@ -10,7 +10,7 @@ import accountRoutes from "./controllers/AccountController";
 import individualRoutes from "./controllers/IndividualController";
 import itemsRoutes from "./controllers/ItemsController";
 import storesRoutes from "./controllers/StoreController";
-
+import healthRoutes from "./controllers/HealthController";
 declare global {
   namespace Express {
     interface Request {
@@ -55,6 +55,7 @@ app.use("/individual", individualRoutes);
 app.use("/account", accountRoutes);
 app.use("/items", itemsRoutes);
 app.use("/stores", storesRoutes);
+app.use("/health", healthRoutes);
 
 const port = process.env.PORT || 5000;
 

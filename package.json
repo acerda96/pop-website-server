@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server/index.ts",
-    "dev": "nodemon server/index.ts",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
     "deploy": "git push --force heroku master",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc "
+    "build": "tsc"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

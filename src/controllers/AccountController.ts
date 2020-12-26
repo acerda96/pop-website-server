@@ -7,11 +7,9 @@ import Store from "../models/StoreModel";
 import validation from "../utils/validation";
 import verifyToken from "../utils/verifyToken";
 
-const { validateRegister, validateLogin, validatePassword } = validation
+const { validateRegister, validateLogin, validatePassword } = validation;
 const router = express.Router();
 
-// @routes POST api/account/register
-// @desc Register user
 router.post("/register", validateRegister, async (req, res) => {
   const body = req.body;
   const salt = await bcrypt.genSalt(10);
@@ -29,15 +27,11 @@ router.post("/register", validateRegister, async (req, res) => {
     });
 });
 
-// @routes POST api/account/login
-// @desc Login user
 router.post("/login", validateLogin, (req, res) => {
   const token = jwt.sign({ id: req.user.id }, process.env.TOKEN_SECRET);
   res.status(200).json({ token, userId: req.user.id });
 });
 
-// @routes DELETE api/account/
-// @desc Delete a user and all stores/items
 router.post("/delete", verifyToken, async (req, res) => {
   const user = await User.findById(req.user.id);
 
@@ -66,4 +60,4 @@ router.post("/delete", verifyToken, async (req, res) => {
     );
 });
 
-export default  router;
+export default router;
