@@ -14,7 +14,7 @@ import storesRoutes from "./controllers/StoreController";
 declare global {
   namespace Express {
     interface Request {
-      user: {id: string};
+      user: { id: string };
       files: any;
     }
   }
@@ -26,16 +26,13 @@ app.use(bodyParse.json());
 
 const whitelist = [
   "http://localhost:8080",
-  "http://localhost:8081",
-  "http://localhost:8082",
-  "https://pop-marketplace.co.uk",
-  "http://pop-marketplace.co.uk"
+  "https://pop-marketplace.herokuapp.com/",
 ];
 
 app.use(
   cors({
     credentials: true,
-    origin (origin, callback) {
+    origin(origin, callback) {
       if (!origin) return callback(null, true);
       if (whitelist.indexOf(origin) === -1) {
         return callback(new Error("CORS error"), false);
