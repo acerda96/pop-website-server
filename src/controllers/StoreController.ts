@@ -55,8 +55,6 @@ router.post("/", verifyToken, (req: any, res) => {
 router.put("/:id", verifyToken, (req, res) => {
   Store.findById(req.params.id)
     .then((store: any) => {
-      console.log(req.body);
-
       const fields = [
         "name",
         "description",

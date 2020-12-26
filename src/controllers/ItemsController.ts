@@ -19,7 +19,6 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
-  console.log(req.body.storeId);
   Store.findById(req.body.storeId)
     .then((store: any) => {
       if (store.userId !== req.user.id)
@@ -65,8 +64,6 @@ router.delete("/:id", verifyToken, (req, res) => {
 router.put("/:id", verifyToken, (req, res) => {
   Item.findById(req.params.id)
     .then((item: any) => {
-      console.log(req.body);
-
       const fields = ["name", "description", "unitPrice", "initialQuantity"];
 
       fields.forEach((field) => {

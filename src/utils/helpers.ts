@@ -1,11 +1,8 @@
 const splitCamelCase = (word) => {
-  let output,
-    i,
-    l,
-    capRe = /[A-Z]/;
+  const capRe = /[A-Z]/;
 
-  output = [];
-  for (i = 0, l = word.length; i < l; i += 1) {
+  const output = [];
+  for (let i = 0, l = word.length; i < l; i += 1) {
     if (i === 0) {
       output.push(word[i].toUpperCase());
     } else {

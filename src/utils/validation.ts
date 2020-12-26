@@ -2,7 +2,8 @@ import User from "../models/UserModel";
 import bcrypt from "bcryptjs";
 import OriginalJoi from "@hapi/joi";
 import splitCamelCase from "./helpers";
-const Joi = OriginalJoi.extend(require("joi-phone-number"));
+import JoiPhoneNumber from "joi-phone-number";
+const Joi = OriginalJoi.extend(JoiPhoneNumber);
 
 const registerSchema = Joi.object({
   email: Joi.string().min(6).required().email(),
