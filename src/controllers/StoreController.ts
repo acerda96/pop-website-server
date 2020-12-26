@@ -2,7 +2,6 @@ import express from "express";
 import Item from "../models/ItemModel";
 import Store from "../models/StoreModel";
 import verifyToken from "../utils/verifyToken";
-import StoreInterface from "../types/Store";
 
 const router = express.Router();
 // @routes GET api/stores/:id

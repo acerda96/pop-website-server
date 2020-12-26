@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 export default async function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
-  console.log("!!!", authHeader)
+  console.log("!!!", authHeader);
 
   if (!authHeader) res.status(401).send({ error: "Unauthorized" });
 
@@ -18,4 +18,4 @@ export default async function verifyToken(req, res, next) {
     req.user = user;
     next();
   });
-};
+}

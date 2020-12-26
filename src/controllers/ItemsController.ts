@@ -2,10 +2,9 @@ import express from "express";
 import Item from "../models/ItemModel";
 import Store from "../models/StoreModel";
 import verifyToken from "../utils/verifyToken";
-import Joi from "@hapi/joi";
 import upload from "../utils/multer-upload";
 
-const RESULTS_PER_PAGE = 20;
+// const RESULTS_PER_PAGE = 20;
 
 const router = express.Router();
 
@@ -103,13 +102,12 @@ router.get("/", async (req, res) => {
   // const page = Number(req.query.page) || 0;
   // const size = Number(req.query.size) || RESULTS_PER_PAGE;
 
-  const sortTerm: { $natural?: number; unitPrice?: number } = {};
-
-  sortCriterion === 0
-    ? {}
-    : sortCriterion === 1
-    ? (sortTerm.$natural = -1)
-    : (sortTerm.unitPrice = 1);
+  const sortTerm: { $natural?: number; unitPrice?: number } =
+    sortCriterion === 0
+      ? {}
+      : sortCriterion === 1
+      ? { $natural: -1 }
+      : { unitPrice: 1 };
 
   try {
     const items = await Item.find(findTerm).sort(sortTerm);

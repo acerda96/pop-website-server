@@ -13,10 +13,7 @@
       "*": ["node_modules/*"],
       "@/*": ["src/*"]
     },
-    "typeRoots": ["./custom_typings", "./node_modules/@types"],
-    "rules": {
-      "no-console": false
-    }
+    "typeRoots": ["./custom_typings", "./node_modules/@types"]
   },
   "include": ["src/**/*"]
 }
