@@ -37,7 +37,7 @@ const StoreSchema = new Schema({
   dates: {
     type: Array,
     required: false,
-    default: [],
+    default: [], 
   },
   website: {
     type: String,
@@ -51,6 +51,20 @@ const StoreSchema = new Schema({
     type: String,
     required: false,
   },
+  status: {
+    type: String,
+    required: false,
+  },
+  position: {
+    lat: {
+      type: Number,
+      required: false,
+    },
+    lng: {
+      type: Number,
+      required: false,
+    },
+  }
 });
 
 export default mongoose.model("Stores", StoreSchema);

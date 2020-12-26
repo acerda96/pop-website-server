@@ -4,9 +4,7 @@ import Joi from "@hapi/joi";
 
 const registerSchema = Joi.object({
   email: Joi.string().min(6).required().email(),
-  name: Joi.string().min(2).required(),
-  mobileNumber: Joi.string().min(6).required(),
-  company: Joi.string().min(2).required(),
+  name: Joi.string().min(1).required(),
   password: Joi.string().min(6).required(),
   confirmPassword: Joi.string().min(6).required(),
 });
@@ -42,7 +40,7 @@ async function validateLogin(req, res, next) {
     return;
   }
 
-  const user  = await User.findOne({ email: req.body.email.toLowerCase() });
+  const user = await User.findOne({ email: req.body.email.toLowerCase() });
 
   if (!user) {
     res.status(400).json({ error: "Invalid email or password" });
@@ -50,6 +48,7 @@ async function validateLogin(req, res, next) {
   }
 
   const validPassword = validatePassword(req.body.password, user.password);
+
   if (!validPassword) {
     res.status(400).json({ error: "Invalid email or password" });
     return;
@@ -59,6 +58,7 @@ async function validateLogin(req, res, next) {
 }
 
 async function validatePassword(storedPassword, inputPassword) {
+  console.log("???", storedPassword, inputPassword);
   return await bcrypt.compare(storedPassword, inputPassword);
 }
 

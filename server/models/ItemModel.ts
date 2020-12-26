@@ -22,21 +22,17 @@ const ItemsSchema = new Schema({
     type: Number,
     required: true,
   },
-  currentQuantity: {
-    type: Number,
-    required: true,
-  },
   unitPrice: {
-    type: Number,
-    required: true,
-  },
-  type: {
     type: Number,
     required: true,
   },
   images: {
     type: Array,
     required: true,
+  },
+  status: {
+    type: String,
+    required: false,
   },
 });
 

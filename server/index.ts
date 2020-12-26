@@ -23,7 +23,27 @@ declare global {
 const app = express();
 
 app.use(bodyParse.json());
-app.use(cors());
+
+const whitelist = [
+  "http://localhost:8080",
+  "http://localhost:8081",
+  "http://localhost:8082",
+  "https://pop-marketplace.co.uk",
+  "http://pop-marketplace.co.uk"
+];
+
+app.use(
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (whitelist.indexOf(origin) === -1) {
+        return callback(new Error("CORS error"), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URI, {

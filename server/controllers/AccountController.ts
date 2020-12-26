@@ -38,7 +38,7 @@ router.post("/login", validateLogin, (req, res) => {
 
 //@routes DELETE api/account/
 //@desc Delete a user and all stores/items
-router.delete("/", verifyToken, async (req, res) => {
+router.post("/delete", verifyToken, async (req, res) => {
   const user = await User.findById(req.user.id);
 
   const validPassword = await validatePassword(
