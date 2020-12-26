@@ -9,8 +9,8 @@ const RESULTS_PER_PAGE = 20;
 
 const router = express.Router();
 
-//@routes GET api/items/:id
-//@desc Get item by id
+// @routes GET api/items/:id
+// @desc Get item by id
 router.get("/:id", (req, res) => {
   Item.findById(req.params.id)
     .then((item) => {
@@ -21,8 +21,8 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//@routes POST api/items
-//@desc Add an item
+// @routes POST api/items
+// @desc Add an item
 router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
   console.log(req.body.storeId);
   Store.findById(req.body.storeId)
@@ -51,8 +51,8 @@ router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
     .catch(() => res.status(400).json({ error: "Store could not be found" }));
 });
 
-//@routes DELETE api/items
-//@desc Delete an item
+// @routes DELETE api/items
+// @desc Delete an item
 router.delete("/:id", verifyToken, (req, res) => {
   Item.findById(req.params.id)
     .then((item: any) => {
@@ -91,8 +91,8 @@ router.put("/:id", verifyToken, (req, res) => {
     });
 });
 
-//@routes POST api/items
-//@desc Get items
+// @routes POST api/items
+// @desc Get items
 router.get("/", async (req, res) => {
   const storeId = req.query.storeId;
   const findTerm = storeId ? { storeId } : { status: "approved" };
@@ -103,13 +103,13 @@ router.get("/", async (req, res) => {
   // const page = Number(req.query.page) || 0;
   // const size = Number(req.query.size) || RESULTS_PER_PAGE;
 
-  const sortTerm = {};
+  const sortTerm: { $natural?: number; unitPrice?: number } = {};
 
   sortCriterion === 0
     ? {}
     : sortCriterion === 1
-    ? (sortTerm["$natural"] = -1)
-    : (sortTerm["unitPrice"] = 1);
+    ? (sortTerm.$natural = -1)
+    : (sortTerm.unitPrice = 1);
 
   try {
     const items = await Item.find(findTerm).sort(sortTerm);
@@ -147,11 +147,11 @@ function compare(a, b) {
 }
 
 function distance(lat1, lon1, lat2, lon2) {
-  var radlat1 = (Math.PI * lat1) / 180;
-  var radlat2 = (Math.PI * lat2) / 180;
-  var theta = lon1 - lon2;
-  var radtheta = (Math.PI * theta) / 180;
-  var dist =
+  const radlat1 = (Math.PI * lat1) / 180;
+  const radlat2 = (Math.PI * lat2) / 180;
+  const theta = lon1 - lon2;
+  const radtheta = (Math.PI * theta) / 180;
+  let dist =
     Math.sin(radlat1) * Math.sin(radlat2) +
     Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
   if (dist > 1) {

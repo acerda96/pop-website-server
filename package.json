@@ -7,7 +7,7 @@
     "dev": "nodemon server/index.ts",
     "deploy": "git push --force heroku master",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc"
+    "build": "tsc "
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

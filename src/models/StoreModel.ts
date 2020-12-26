@@ -37,7 +37,7 @@ const StoreSchema = new Schema({
   dates: {
     type: Array,
     required: false,
-    default: [], 
+    default: [],
   },
   website: {
     type: String,

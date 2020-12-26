@@ -15,7 +15,7 @@ router.post("/email-signup", (req, res) => {
     .save()
     .then((signup) => {
       res.status(201).json(signup);
-      var transport = nodemailer.createTransport({
+      const transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
           user: process.env.SENDER_EMAIL,
@@ -23,7 +23,7 @@ router.post("/email-signup", (req, res) => {
         },
       });
 
-      var mailOptions = {
+      const mailOptions = {
         from: process.env.SENDER_EMAIL,
         to: process.env.RECIPIENT_EMAILS,
         subject: "POP UPDATE: New user signed up!",
@@ -49,7 +49,7 @@ router.post("/contact", (req, res) => {
     .save()
     .then((contactRequest) => {
       res.status(201).json(contactRequest);
-      var transport = nodemailer.createTransport({
+      const transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
           user: process.env.SENDER_EMAIL,
@@ -57,7 +57,7 @@ router.post("/contact", (req, res) => {
         },
       });
 
-      var mailOptions = {
+      const mailOptions = {
         from: process.env.SENDER_EMAIL,
         to: process.env.RECIPIENT_EMAILS,
         subject: "POP UPDATE: New contact request received!",

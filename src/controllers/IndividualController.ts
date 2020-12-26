@@ -5,8 +5,8 @@ import verifyToken from "../utils/verifyToken";
 
 const router = express.Router();
 
-//@routes GET api/individual
-//@desc Get individual from token
+// @routes GET api/individual
+// @desc Get individual from token
 
 router.get("/", verifyToken, (req, res) => {
   User.findById(req.user.id)
@@ -18,8 +18,8 @@ router.get("/", verifyToken, (req, res) => {
     });
 });
 
-//@routes PUT api/individual
-//@desc Update individual
+// @routes PUT api/individual
+// @desc Update individual
 router.put("/", verifyToken, (req, res) => {
   User.findById(req.user.id)
     .then((user:any) => {

@@ -14,7 +14,7 @@ import storesRoutes from "./controllers/StoreController";
 declare global {
   namespace Express {
     interface Request {
-      user: {id: string}; 
+      user: {id: string};
       files: any;
     }
   }
@@ -35,7 +35,7 @@ const whitelist = [
 app.use(
   cors({
     credentials: true,
-    origin: function (origin, callback) {
+    origin (origin, callback) {
       if (!origin) return callback(null, true);
       if (whitelist.indexOf(origin) === -1) {
         return callback(new Error("CORS error"), false);

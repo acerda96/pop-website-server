@@ -14,7 +14,7 @@ const storage = new GridFsStorage({
         console.log("REQQWE", req);
         const filename = buf.toString("hex") + path.extname(file.originalname);
         const fileInfo = {
-          filename: filename,
+          filename,
           bucketName: "items_images",
         };
         resolve(fileInfo);

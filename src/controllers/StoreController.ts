@@ -5,8 +5,8 @@ import verifyToken from "../utils/verifyToken";
 import StoreInterface from "../types/Store";
 
 const router = express.Router();
-//@routes GET api/stores/:id
-//@desc Get store by id
+// @routes GET api/stores/:id
+// @desc Get store by id
 router.get("/:id", (req, res) => {
   Store.findById(req.params.id)
     .then((store) => {
@@ -17,8 +17,8 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//@routes GET api/stores
-//@desc Get stores
+// @routes GET api/stores
+// @desc Get stores
 router.get("/", (req, res) => {
   if (req.query.userId) {
     Store.find({ userId: req.query.userId })
@@ -39,8 +39,8 @@ router.get("/", (req, res) => {
   }
 });
 
-//@routes POST api/stores
-//@desc Add a store
+// @routes POST api/stores
+// @desc Add a store
 router.post("/", verifyToken, (req: any, res) => {
   const newStore = new Store({
     ...req.body,
@@ -58,8 +58,8 @@ router.post("/", verifyToken, (req: any, res) => {
     });
 });
 
-//@routes PUT api/stores
-//@desc Edit a store
+// @routes PUT api/stores
+// @desc Edit a store
 router.put("/:id", verifyToken, (req, res) => {
   Store.findById(req.params.id)
     .then((store: any) => {
@@ -92,8 +92,8 @@ router.put("/:id", verifyToken, (req, res) => {
     });
 });
 
-//@routes DELETE api/stores
-//@desc Delete a store
+// @routes DELETE api/stores
+// @desc Delete a store
 router.delete("/:id", verifyToken, (req, res) => {
   Store.findById(req.params.id)
     .then((store: any) => {
