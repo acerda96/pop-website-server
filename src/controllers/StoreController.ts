@@ -8,10 +8,10 @@ const router = express.Router();
 router.get("/:id", (req, res) => {
   Store.findById(req.params.id)
     .then((store) => {
-      res.status(200).json(store);
+      return res.status(200).json(store);
     })
     .catch(() => {
-      res.status(404).json({ error: "Store could not be found" });
+      return res.status(404).json({ error: "Store could not be found" });
     });
 });
 
@@ -19,18 +19,18 @@ router.get("/", (req, res) => {
   if (req.query.userId) {
     Store.find({ userId: req.query.userId })
       .then((stores) => {
-        res.status(200).json(stores);
+        return res.status(200).json(stores);
       })
       .catch((err) => {
-        res.status(400).json({ error: "Could not retrieve stores" });
+        return res.status(400).json({ error: "Could not retrieve stores" });
       });
   } else {
     Store.find({ status: "approved" })
       .then((stores) => {
-        res.status(200).json(stores);
+        return res.status(200).json(stores);
       })
       .catch((err) => {
-        res.status(400).json({ error: "Could not retrieve stores" });
+        return res.status(400).json({ error: "Could not retrieve stores" });
       });
   }
 });
@@ -44,11 +44,11 @@ router.post("/", verifyToken, (req: any, res) => {
   newStore
     .save()
     .then((store) => {
-      res.status(201).json(store);
+      return res.status(201).json(store);
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).json({ error: "Could not add store" });
+      return res.status(400).json({ error: "Could not add store" });
     });
 });
 
@@ -77,10 +77,10 @@ router.put("/:id", verifyToken, (req, res) => {
       store.status = "pending";
 
       store.save();
-      res.status(200).json(store);
+      return res.status(200).json(store);
     })
     .catch(() => {
-      res.status(404).json({ error: "Store could not be found" });
+      return res.status(404).json({ error: "Store could not be found" });
     });
 });
 
@@ -90,16 +90,20 @@ router.delete("/:id", verifyToken, (req, res) => {
       if (store.userId === req.user.id) {
         store.delete();
         Item.deleteMany({ storeId: store.id })
-          .then(() => res.status(204).json({}))
-          .catch(() =>
-            res.status(404).json({ error: "Store items could not be deleted" })
-          );
+          .then(() => {
+            return res.status(204).json({});
+          })
+          .catch(() => {
+            return res
+              .status(404)
+              .json({ error: "Store items could not be deleted" });
+          });
       } else {
-        res.status(401).json({ error: "Unauthorized" });
+        return res.status(401).json({ error: "Unauthorized" });
       }
     })
     .catch(() => {
-      res.status(404).json({ error: "Store could not be found" });
+      return res.status(404).json({ error: "Store could not be found" });
     });
 });
 

@@ -32,7 +32,8 @@ const whitelist = [
 app.use(
   (req, res, next) => {
     if (!req.headers.origin) {
-      res.send("Origin should not be undefined");
+      // res.send("Origin should not be undefined");
+      next();
     } else {
       next();
     }

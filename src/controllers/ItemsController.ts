@@ -11,10 +11,10 @@ const router = express.Router();
 router.get("/:id", (req, res) => {
   Item.findById(req.params.id)
     .then((item) => {
-      res.status(200).json(item);
+      return res.status(200).json(item);
     })
     .catch(() => {
-      res.status(404).json({ error: "Item could not be found" });
+      return res.status(404).json({ error: "Item could not be found" });
     });
 });
 
@@ -23,7 +23,7 @@ router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
   Store.findById(req.body.storeId)
     .then((store: any) => {
       if (store.userId !== req.user.id)
-        res.status(401).json({ error: "Unauthorized" });
+        return res.status(401).json({ error: "Unauthorized" });
       else {
         const newItem = new Item({
           ...req.body,
@@ -35,15 +35,16 @@ router.post("/", verifyToken, upload.array("images", 4), (req, res) => {
         newItem
           .save()
           .then((item) => {
-            res.status(201).json(item);
+            return res.status(201).json(item);
           })
           .catch((err) => {
-            console.log(err);
-            res.status(400).json({ error: "Item could not be added" });
+            return res.status(400).json({ error: "Item could not be added" });
           });
       }
     })
-    .catch(() => res.status(400).json({ error: "Store could not be found" }));
+    .catch(() => {
+      return res.status(400).json({ error: "Store could not be found" });
+    });
 });
 
 router.delete("/:id", verifyToken, (req, res) => {
@@ -51,13 +52,13 @@ router.delete("/:id", verifyToken, (req, res) => {
     .then((item: any) => {
       if (item.userId === req.user.id) {
         item.delete();
-        res.status(204).send();
+        return res.status(204).send();
       } else {
-        res.status(401).json({ error: "Unauthorized" });
+        return res.status(401).json({ error: "Unauthorized" });
       }
     })
     .catch(() => {
-      res.status(404).json({ error: "Item could not be found" });
+      return res.status(404).json({ error: "Item could not be found" });
     });
 });
 
@@ -77,10 +78,10 @@ router.put("/:id", verifyToken, (req, res) => {
       item.status = "pending";
 
       item.save();
-      res.status(200).json(item);
+      return res.status(200).json(item);
     })
     .catch(() => {
-      res.status(404).json({ error: "Item could not be found" });
+      return res.status(404).json({ error: "Item could not be found" });
     });
 });
 
@@ -119,10 +120,10 @@ router.get("/", async (req, res) => {
       items.sort(compare);
     }
 
-    res.status(200).json(items);
+    return res.status(200).json(items);
   } catch (err) {
     console.log(err);
-    res.status(404).json({ error: "Items could not be retrieved" });
+    return res.status(404).json({ error: "Items could not be retrieved" });
   }
 });
 

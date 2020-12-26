@@ -41,23 +41,22 @@ router.post("/delete", verifyToken, async (req, res) => {
   );
 
   if (!validPassword) {
-    res.status(400).json({ error: "Invalid email or password" });
-    return;
+    return res.status(400).json({ error: "Invalid email or password" });
   }
 
   User.findByIdAndDelete(req.user.id).catch(() => {
-    res.status(404).json({ error: "User could not be found" });
+    return res.status(404).json({ error: "User could not be found" });
   });
 
-  Store.deleteMany({ userId: req.user.id }).catch(() =>
-    res.status(404).json({ error: "User stores could not be deleted" })
-  );
+  Store.deleteMany({ userId: req.user.id }).catch(() => {
+    return res.status(404).json({ error: "User stores could not be deleted" });
+  });
 
   Item.deleteMany({ userId: req.user.id })
     .then(() => res.status(204).json({}))
-    .catch(() =>
-      res.status(404).json({ error: "User items could not be deleted" })
-    );
+    .catch(() => {
+      return res.status(404).json({ error: "User items could not be deleted" });
+    });
 });
 
 export default router;
