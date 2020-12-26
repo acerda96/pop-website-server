@@ -26,10 +26,17 @@ app.use(bodyParse.json());
 
 const whitelist = [
   "http://localhost:8080",
-  "https://pop-marketplace.herokuapp.com/",
+  "https://pop-marketplace.herokuapp.com",
 ];
 
 app.use(
+  (req, res, next) => {
+    if (!req.headers.origin) {
+      res.send("Origin should not be undefined");
+    } else {
+      next();
+    }
+  },
   cors({
     credentials: true,
     origin(origin, callback) {

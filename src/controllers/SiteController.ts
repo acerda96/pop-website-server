@@ -6,7 +6,7 @@ import nodemailer from "nodemailer";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.status(200).json("Hello and welcome to the pop-marketplace web-api :)");
+  res.status(200).json("Hello! Welcome to the pop-marketplace web-api :)");
 });
 
 router.post("/email-signup", (req, res) => {
