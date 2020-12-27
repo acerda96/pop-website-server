@@ -15,6 +15,7 @@ const itemSchema = Joi.object({
   price: Joi.number().required(),
   images: Joi.allow(),
   storeId: Joi.required(),
+  userId: Joi.allow(),
 });
 
 const router = express.Router();
@@ -129,17 +130,20 @@ router.get("/", async (req, res) => {
 
   const sortTerm: { $natural?: number; price?: number } =
     sortCriterion === 0
-      ? {}
-      : sortCriterion === 1
       ? { $natural: -1 }
-      : { price: 1 };
+      : sortCriterion === 1
+      ? { price: 1 }
+      : {};
 
   try {
     const items = await Item.find(findTerm).sort(sortTerm);
     // .skip(RESULTS_PER_PAGE * page)
     // .limit(size);
 
-    if (sortCriterion === 0) {
+    if (
+      sortCriterion === 0 ||
+      (sortCriterion === 3 && (!longitude || !latitude))
+    ) {
       items.forEach(async (item: any) => {
         const store: any = await Store.findById(item.storeId);
         item.distance = distance(
