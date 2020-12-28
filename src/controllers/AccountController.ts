@@ -5,7 +5,7 @@ import User from "../models/UserModel";
 import Item from "../models/ItemModel";
 import Store from "../models/StoreModel";
 import validation from "../utils/accountValidation";
-import verifyToken from "../utils/verifyToken";
+import { verifyToken } from "../utils/verifyToken";
 
 const { validateRegister, validateLogin, validatePassword } = validation;
 const router = express.Router();

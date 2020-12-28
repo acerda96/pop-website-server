@@ -1,7 +1,7 @@
 import express from "express";
 import Item from "../models/ItemModel";
 import Store from "../models/StoreModel";
-import verifyToken from "../utils/verifyToken";
+import { verifyToken } from "../utils/verifyToken";
 import Joi from "@hapi/joi";
 import splitCamelCase from "../utils/helpers";
 
@@ -79,6 +79,10 @@ router.post("/", verifyToken, (req: any, res) => {
 router.put("/:id", verifyToken, (req, res) => {
   Store.findById(req.params.id)
     .then((store: any) => {
+      if (store.userId !== req.user.id) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
       const fields = [
         "name",
         "description",
