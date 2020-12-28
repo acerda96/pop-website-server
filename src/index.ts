@@ -27,6 +27,7 @@ app.use(bodyParse.json());
 const whitelist = [
   "http://localhost:8080",
   "https://pop-marketplace.herokuapp.com",
+  "http://pop-marketplace.herokuapp.com",
 ];
 
 app.use(
